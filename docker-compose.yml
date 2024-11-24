@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: postgres_prod
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./certs:/etc/ssl/certs
+      - ./scripts:/docker-entrypoint-initdb.d
+    ports:
+      - "127.0.0.1:5432:5432"
+    networks:
+      - postgres-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_prod
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "16543:80"
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin
+      - ./data/pgadmin/config_local.py:/pgadmin4/config_local.py
+    networks:
+      - postgres-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:16543 || exit 1"]  # Atualizado para a porta 16543
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks: 
+  postgres-network:
+    driver: bridge

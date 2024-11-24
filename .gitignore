@@ -1,0 +1,4 @@
+/certs/
+/data/
+/.env
+/scripts/create.sql
