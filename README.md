@@ -14,8 +14,8 @@ Antes de iniciar, verifique se você tem as seguintes ferramentas instaladas em 
 1. **Clone este repositório:**
 
    ```bash
-   git clone https://seu-repositorio.git
-   cd seu-repositorio
+   git clone https://github.com/Matheus-Pedro/postgresql-database.git
+   cd postgresql-database
     ```
 
 2. **Crie um arquivo `.env` a partir do arquivo `.env-example`:**
