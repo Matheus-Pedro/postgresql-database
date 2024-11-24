@@ -1,3 +1,5 @@
+![PostgreSQL + Docker](./imgs/psql+docker.png)
+
 # Projeto Exemplo com PostgreSQL e pgAdmin
 
 Este projeto é uma aplicação de exemplo que configura um banco de dados PostgreSQL e a interface gráfica pgAdmin para gerenciamento do banco de dados. Abaixo estão as instruções para configurar e rodar o projeto em seu ambiente local ou em um servidor.
